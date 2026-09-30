@@ -114,6 +114,110 @@ function TechLogo({ type }: { type: TechStackItem['icon'] }) {
   }
 }
 
+// Minimalist PCB / Circuit Line Background Accents
+function CircuitBackground() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+      {/* Top Right Circuit Accent (Along Right Outer Margin) */}
+      <svg
+        className="absolute -top-6 -right-24 lg:-right-10 w-[360px] sm:w-[480px] h-[480px] text-neutral-800/30 opacity-40"
+        viewBox="0 0 500 500"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M500 70 H360 L300 130 H220 L180 170 V250 L130 300 H40"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+        />
+        <path
+          d="M500 150 H390 L340 200 H260 L220 240 V330 L170 380 H80"
+          stroke="#FF6A00"
+          strokeWidth="1.2"
+          strokeOpacity="0.3"
+        />
+        <path
+          d="M500 230 H420 L370 280 H310 L280 310 V410"
+          stroke="#2563EB"
+          strokeWidth="1.2"
+          strokeOpacity="0.3"
+        />
+        {/* Circuit Nodes */}
+        <circle cx="220" cy="130" r="3.5" fill="#08090C" stroke="#FF6A00" strokeWidth="1.5" />
+        <circle cx="180" cy="170" r="3" fill="#FF6A00" fillOpacity="0.6" />
+        <circle cx="130" cy="300" r="3.5" fill="#08090C" stroke="#2563EB" strokeWidth="1.5" />
+        <circle cx="260" cy="200" r="3" fill="#2563EB" fillOpacity="0.6" />
+        <circle cx="220" cy="240" r="4" fill="#08090C" stroke="#FF6A00" strokeWidth="1.5" />
+        <circle cx="80" cy="380" r="3" fill="#FF6A00" fillOpacity="0.8" />
+        <circle cx="280" cy="410" r="3.5" fill="#2563EB" fillOpacity="0.8" />
+      </svg>
+
+      {/* Mid Left Circuit Accent (Along Left Outer Margin) */}
+      <svg
+        className="absolute top-[800px] -left-24 lg:-left-12 w-[340px] sm:w-[460px] h-[540px] text-neutral-800/30 opacity-40"
+        viewBox="0 0 500 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 120 H140 L200 180 H280 L330 230 V320 L270 380 H180"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="6 4"
+        />
+        <path
+          d="M0 200 H100 L160 260 H240 L290 310 V420 L340 470 H440"
+          stroke="#2563EB"
+          strokeWidth="1.2"
+          strokeOpacity="0.3"
+        />
+        <path
+          d="M0 320 H80 L130 370 V480 L170 520 H260"
+          stroke="#FF6A00"
+          strokeWidth="1.2"
+          strokeOpacity="0.3"
+        />
+        {/* Nodes */}
+        <circle cx="140" cy="120" r="3.5" fill="#08090C" stroke="#2563EB" strokeWidth="1.5" />
+        <circle cx="200" cy="180" r="3" fill="#2563EB" fillOpacity="0.6" />
+        <circle cx="330" cy="230" r="3.5" fill="#08090C" stroke="#FF6A00" strokeWidth="1.5" />
+        <circle cx="180" cy="380" r="4" fill="#FF6A00" fillOpacity="0.7" />
+        <circle cx="240" cy="260" r="3" fill="#2563EB" fillOpacity="0.6" />
+        <circle cx="440" cy="470" r="3.5" fill="#08090C" stroke="#2563EB" strokeWidth="1.5" />
+        <circle cx="260" cy="520" r="3" fill="#FF6A00" fillOpacity="0.8" />
+      </svg>
+
+      {/* Bottom Right Circuit Accent (Near Projects & Contact) */}
+      <svg
+        className="absolute top-[1600px] -right-24 lg:-right-12 w-[360px] sm:w-[480px] h-[560px] text-neutral-800/30 opacity-40"
+        viewBox="0 0 500 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M500 100 H350 L290 160 H200 L150 210 V310 L90 370 H0"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeDasharray="5 5"
+        />
+        <path
+          d="M500 220 H380 L310 290 H230 L180 340 V440 L130 490 H30"
+          stroke="#FF6A00"
+          strokeWidth="1.2"
+          strokeOpacity="0.3"
+        />
+        {/* Nodes */}
+        <circle cx="350" cy="100" r="3.5" fill="#08090C" stroke="#FF6A00" strokeWidth="1.5" />
+        <circle cx="200" cy="160" r="3" fill="#FF6A00" fillOpacity="0.6" />
+        <circle cx="150" cy="210" r="3.5" fill="#08090C" stroke="#2563EB" strokeWidth="1.5" />
+        <circle cx="230" cy="290" r="3" fill="#2563EB" fillOpacity="0.6" />
+        <circle cx="30" cy="490" r="4" fill="#FF6A00" fillOpacity="0.8" />
+      </svg>
+    </div>
+  )
+}
+
 export default function App() {
   const [experienceTab, setExperienceTab] = useState<'work' | 'creative'>('work')
   const [copiedEmail, setCopiedEmail] = useState(false)
@@ -124,7 +228,7 @@ export default function App() {
       role: 'Lead Software Engineer',
       company: 'PT Kamunesia Media Arta',
       employmentType: 'Full-time',
-      period: '2025 — Sekarang',
+      period: 'September 2025 — Sekarang',
       description:
         'Memimpin pengembangan dan arsitektur sistem full-stack (React, NestJS, PostgreSQL), serta mengelola infrastruktur server dan deployment (DevOps, CI/CD).',
       badgeColor: 'orange',
@@ -146,25 +250,25 @@ export default function App() {
   const creativeExperiences: ExperienceItem[] = [
     {
       id: 'btri',
-      role: 'Media & Production Lead',
-      company: 'Komunitas BTRI',
+      role: 'Community & Media Administrator',
+      company: 'Komunitas Bocchi the Rock! Indonesia',
       employmentType: 'Volunteer',
-      period: '2023 — Sekarang',
+      period: 'Mei 2026 — Sekarang',
       description:
-        'Mengordinasikan produksi multimedia, videografi panggung konser, dan dokumentasi visual acara komunitas.',
+        'Mengelola administrasi dan kegiatan komunitas, termasuk koordinasi acara, publikasi informasi, pengelolaan media sosial, serta dokumentasi dan komunikasi dengan anggota komunitas.',
       badgeColor: 'blue',
-      tags: ['Videography', 'Color Grading', 'Live Stage', 'Directing']
+      tags: ['Leadership', 'Community Management', 'Event Planning & Coordination', 'Social Media', 'Public Relations']
     },
     {
-      id: 'audio',
-      role: 'Audio Arranger & Guitarist',
-      company: 'Music & Creative Projects',
-      employmentType: 'Freelance',
-      period: '2021 — Sekarang',
+      id: 'gkgs',
+      role: 'Youth Ministry & Music Volunteer',
+      company: 'Gereja Kristus Gading Serpong',
+      employmentType: 'Volunteer',
+      period: '2022 — Sekarang',
       description:
-        'Melakukan tracking instrumen, aransemen audio multi-track pada DAW, dan produksi komposisi musik.',
+        'Terlibat dalam pelayanan remaja dan kegiatan youth, termasuk membantu koordinasi kegiatan, persiapan acara, serta mendukung pelayanan musik dalam ibadah.',
       badgeColor: 'orange',
-      tags: ['DAW Audio', 'Guitar', 'Arranging', 'Mixing']
+      tags: ['Youth Ministry', 'Music', 'Project Management', 'Faith-Based Leadership']
     }
   ]
 
@@ -239,6 +343,9 @@ export default function App() {
       <div className="glow-blue top-[1100px] -left-20" />
       <div className="glow-orange top-[1600px] -right-20" />
 
+      {/* Minimalist Circuit Line Background Accents */}
+      <CircuitBackground />
+
       {/* Sticky Minimal Nav */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-dark/80 border-b border-brand-border/60 transition-all">
         <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
@@ -275,7 +382,7 @@ export default function App() {
       </header>
 
       {/* Main Content Container */}
-      <main className="max-w-4xl mx-auto px-6 pt-32 pb-24 space-y-24">
+      <main className="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24 space-y-24">
         {/* HERO SECTION (Personal Brand Centric) */}
         <section id="about" className="scroll-mt-24 text-center pt-8 space-y-6">
           {/* Status Badge */}
@@ -284,7 +391,7 @@ export default function App() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
             </span>
-            <span className="font-medium">Available for Software & DevOps Projects</span>
+            <span className="font-medium">Open to Software Engineering Opportunities</span>
             <span className="text-neutral-600">·</span>
             <span className="text-neutral-400 font-mono text-[11px]">Tangerang, ID</span>
           </div>
