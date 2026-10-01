@@ -218,7 +218,7 @@ export default function App() {
       title: 'Kamunesia Media Arta Web',
       description:
         'Memimpin pengembangan web application PT Kamunesia Media Arta bersama tim, mulai dari merancang sistem dan arsitektur aplikasi, mengembangkan frontend dan backend secara full-stack, hingga deployment dan pengelolaan infrastruktur.',
-      tags: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'DevOps'],
+      tags: ['React', 'Node.js', 'REST API', 'PostgreSQL', 'DevOps'],
       theme: 'orange',
       imageUrl: '/images/KMA_Web.png',
       linkText: 'View Web',
@@ -239,26 +239,26 @@ export default function App() {
     {
       id: 'gkgs',
       category: 'Full-Stack Ecosystem',
-      title: 'GKGS App',
+      title: 'GKGS APP',
       description:
-        'Aplikasi mobile dan backend logistik operasional menggunakan Flutter, NestJS, dan PostgreSQL dengan arsitektur scalable.',
-      tags: ['Flutter', 'NestJS', 'Prisma', 'PostgreSQL'],
+        'Prototype aplikasi mobile untuk mendukung digitalisasi layanan dan aktivitas gereja. Merancang dan mengembangkan sistem secara full-stack, mulai dari mobile application menggunakan Flutter, REST API dengan NestJS, hingga pengelolaan database PostgreSQL melalui Supabase. Fitur yang dikembangkan meliputi QR attendance, informasi gereja, doa & kesaksian, Alkitab digital, serta persembahan.',
+      tags: ['Flutter', 'NestJS', 'PostgreSQL', 'Supabase'],
       theme: 'orange',
       imageUrl: '/images/gkgs_app.png',
       linkText: 'GitHub Repo',
       linkUrl: 'https://github.com/JovanSiallagan/GKGS-APP'
     },
     {
-      id: 'sinefolis',
-      category: 'Web Application',
-      title: 'Sinefolis Platform',
+      id: 'bocchipoll',
+      category: 'Desktop Application',
+      title: 'Bocchi the Rock! Indonesia — Polling System',
       description:
-        'Platform katalog film modern yang berfokus pada prinsip User-Centered Design (UCD) dan performa interaktif berkecepatan tinggi.',
-      tags: ['React', 'Tailwind', 'TypeScript', 'UI/UX'],
+        'Aplikasi desktop interaktif untuk melakukan polling karakter favorit dari Bocchi the Rock!. Dibangun menggunakan Java Swing dan SQLite, dengan fitur live voting, visualisasi hasil secara real-time, serta penyimpanan data secara lokal.',
+      tags: ['Java', 'Swing', 'SQLite'],
       theme: 'blue',
-      imageUrl: '',
-      linkText: 'View Web',
-      linkUrl: 'https://github.com/JovanSiallagan'
+      imageUrl: '/images/bocchi_poll.png',
+      linkText: 'GitHub Repo',
+      linkUrl: 'https://github.com/JovanSiallagan/BocchiPoll'
     }
   ]
 
