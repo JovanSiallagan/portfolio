@@ -2,8 +2,6 @@ import { useState } from 'react'
 import {
   Mail,
   ArrowUpRight,
-  ArrowDown,
-  Sparkles,
   Layers,
   Code2,
   Terminal,
@@ -27,7 +25,8 @@ interface ExperienceItem {
 interface TechStackItem {
   id: string
   name: string
-  icon: 'react' | 'node' | 'nestjs' | 'docker' | 'postgres' | 'linux' | 'tailwind' | 'python' | 'flutter' | 'git'
+  // Tempat menaruh logo: file lokal di folder 'public/icons/' atau link URL gambar/SVG
+  logo: string
 }
 
 interface ProjectItem {
@@ -38,80 +37,9 @@ interface ProjectItem {
   tags: string[]
   theme: 'orange' | 'blue'
   imageUrl?: string
-  githubUrl?: string
-  liveUrl?: string
-}
-
-// Tech Stack SVG Logos Component
-function TechLogo({ type }: { type: TechStackItem['icon'] }) {
-  switch (type) {
-    case 'react':
-      return (
-        <svg className="w-5 h-5 text-[#61DAFB] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(0 12 12)" />
-          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)" />
-          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)" />
-          <circle cx="12" cy="12" r="1.5" fill="currentColor" />
-        </svg>
-      )
-    case 'node':
-      return (
-        <svg className="w-5 h-5 text-[#5FA04E] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2l9 5.2v10.4L12 22.8 3 17.6V7.2L12 2zm0 2.3L5 8.3v7.4l7 4 7-4V8.3L12 4.3z" />
-          <path d="M12 7.5l4 2.3v4.4l-4 2.3-4-2.3V9.8l4-2.3z" />
-        </svg>
-      )
-    case 'nestjs':
-      return (
-        <svg className="w-5 h-5 text-[#EA2845] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12.4 2.2c-.3-.2-.7-.2-.9 0L2.8 7.3c-.3.2-.5.5-.5.8v9.8c0 .3.2.7.5.8l8.7 5.1c.3.2.7.2.9 0l8.8-5.1c.3-.2.5-.5.5-.8V8.1c0-.3-.2-.7-.5-.8L12.4 2.2zm-2.2 4.6l6 3.5-3.8 2.2-6-3.5 3.8-2.2zm-5.4 3.1l4.6 2.7v5.4l-4.6-2.7V9.9zm6.6 8.1v-5.4l4.6-2.7v5.4l-4.6 2.7z" />
-        </svg>
-      )
-    case 'docker':
-      return (
-        <svg className="w-5 h-5 text-[#2496ED] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M13.98 9.53h2.15v2.15H13.98zm-2.6 0h2.15v2.15h-2.15zm-2.6 0h2.15v2.15H8.78zm5.2-2.6h2.15v2.15h-2.15zm-2.6 0h2.15v2.15h-2.15zm-2.6 0h2.15v2.15H8.78zm-2.6 2.6h2.15v2.15H6.18zm0-2.6h2.15v2.15H6.18zm5.2-2.6h2.15v2.15h-2.15z" />
-          <path d="M21.93 11.83c-.45-.33-1.42-.48-2.2-.38-.13-.75-.62-1.44-1.28-1.87l-.48-.31-.33.47c-.43.62-.6 1.4-.48 2.14-.38.19-.88.35-1.49.46H2.17c-.42 0-.67.34-.67.75 0 2.22.75 4.3 2.1 5.65C5.07 20.2 7.7 21 11.23 21c6.54 0 10.9-4.07 11.27-8.23.03-.31-.1-.66-.57-.94z" />
-        </svg>
-      )
-    case 'postgres':
-      return (
-        <svg className="w-5 h-5 text-[#336791] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z" />
-        </svg>
-      )
-    case 'linux':
-      return (
-        <svg className="w-5 h-5 text-[#FCC624] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2c-3.3 0-6 2.7-6 6 0 2.2 1.2 4.1 3 5.1V15c-2.2 0-4 1.8-4 4v3h14v-3c0-2.2-1.8-4-4-4v-1.9c1.8-1 3-2.9 3-5.1 0-3.3-2.7-6-6-6zm-1.5 5c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1zm3 0c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z" />
-        </svg>
-      )
-    case 'tailwind':
-      return (
-        <svg className="w-5 h-5 text-[#38BDF8] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.335 6.182 14.974 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.335 13.382 8.974 12 6.001 12z" />
-        </svg>
-      )
-    case 'python':
-      return (
-        <svg className="w-5 h-5 text-[#3776AB] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11.928 1.25c-5.01 0-4.695 2.172-4.695 2.172l.006 2.25h4.757v.675H5.309S2 5.97 2 11.01s2.887 4.86 2.887 4.86h1.724v-2.434s-.093-2.887 2.836-2.887h4.868v-.675s.162-2.316-2.387-2.316zm-1.625 1.547a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5z" />
-          <path d="M12.072 22.75c5.01 0 4.695-2.172 4.695-2.172l-.006-2.25h-4.757v-.675h6.687S22 18.03 22 12.99s-2.887-4.86-2.887-4.86h-1.724v2.434s.093 2.887-2.836 2.887H9.685v.675s-.162 2.316 2.387 2.316zm1.625-1.547a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5z" />
-        </svg>
-      )
-    case 'flutter':
-      return (
-        <svg className="w-5 h-5 text-[#02569B] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M14.314 0L2.3 12 6 15.7 21.686 0h-7.372zm.014 11.072L7.957 17.443 14.328 23.8h7.372l-9.986-9.986 2.614-2.742z" />
-        </svg>
-      )
-    case 'git':
-      return (
-        <svg className="w-5 h-5 text-[#F05032] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M21.62 10.95L13.06 2.4a1.86 1.86 0 0 0-2.63 0l-1.9 1.9 2.5 2.5a2.2 2.2 0 0 1 2.8 2.8l2.4 2.4a2.2 2.2 0 1 1-1.3 1.3l-2.26-2.26v5.33a2.2 2.2 0 1 1-1.86 0V11a2.2 2.2 0 0 1-1.2-2.89L7.14 5.62 2.38 10.4a1.86 1.86 0 0 0 0 2.63l8.56 8.56a1.86 1.86 0 0 0 2.63 0l8.05-8.05a1.86 1.86 0 0 0 0-2.59z" />
-        </svg>
-      )
-  }
+  // Tombol link proyek (bisa diisi 'View Web', 'GitHub Repo', dsb beserta URL-nya)
+  linkText?: string
+  linkUrl?: string
 }
 
 // Minimalist PCB / Circuit Line Background Accents
@@ -273,46 +201,52 @@ export default function App() {
   ]
 
   const techStacks: TechStackItem[] = [
-    { id: 'react', name: 'React', icon: 'react' },
-    { id: 'node', name: 'Node.js', icon: 'node' },
-    { id: 'nestjs', name: 'NestJS', icon: 'nestjs' },
-    { id: 'docker', name: 'Docker', icon: 'docker' },
-    { id: 'postgres', name: 'PostgreSQL', icon: 'postgres' },
-    { id: 'linux', name: 'Linux / DevOps', icon: 'linux' },
-    { id: 'tailwind', name: 'Tailwind CSS', icon: 'tailwind' },
-    { id: 'python', name: 'Python', icon: 'python' }
+    { id: 'typescript', name: 'TypeScript', logo: '/icons/typescript.svg' },
+    { id: 'nodejs', name: 'Node.js', logo: '/icons/nodejs.svg' },
+    { id: 'git', name: 'Git', logo: '/icons/git.svg' },
+    { id: 'java', name: 'Java', logo: '/icons/java.svg' },
+    { id: 'react', name: 'React', logo: '/icons/react.svg' },
+    { id: 'postgresql', name: 'PostgreSQL', logo: '/icons/postgresql.svg' },
+    { id: 'flutter', name: 'Flutter', logo: '/icons/flutter.svg' },
+    { id: 'deployment', name: 'Deployment', logo: '/icons/deployment.svg' }
   ]
 
   const projects: ProjectItem[] = [
     {
+      id: 'kamunesiaweb',
+      category: 'Web Application',
+      title: 'Kamunesia Media Arta Web',
+      description:
+        'Memimpin pengembangan web application PT Kamunesia Media Arta bersama tim, mulai dari merancang sistem dan arsitektur aplikasi, mengembangkan frontend dan backend secara full-stack, hingga deployment dan pengelolaan infrastruktur.',
+      tags: ['React', 'Tailwind', 'Node.js', 'PostgreSQL', 'DevOps'],
+      theme: 'orange',
+      imageUrl: '/images/KMA_Web.png',
+      linkText: 'View Web',
+      linkUrl: 'https://kamunesia.com'
+    },
+    {
+      id: 'ojs',
+      category: 'Web Platform',
+      title: 'EduHuman Society Journal Web',
+      description:
+        'Website jurnal ilmiah EduHuman Society berbasis Open Journal Systems (OJS), yang dikembangkan dan dikonfigurasi untuk mendukung pengelolaan publikasi, artikel ilmiah, serta proses editorial dan penerbitan jurnal secara online.',
+      tags: ['PHP', 'Open Journal Systems', 'MySQL', 'Deployment'],
+      theme: 'blue',
+      imageUrl: '/images/OJS_Web.png',
+      linkText: 'View Web',
+      linkUrl: 'https://journal.kamunesia.com'
+    },
+    {
       id: 'gkgs',
       category: 'Full-Stack Ecosystem',
-      title: 'GKGS Platform',
+      title: 'GKGS App',
       description:
         'Aplikasi mobile dan backend logistik operasional menggunakan Flutter, NestJS, dan PostgreSQL dengan arsitektur scalable.',
       tags: ['Flutter', 'NestJS', 'Prisma', 'PostgreSQL'],
       theme: 'orange',
-      imageUrl: '' // Tempat memasukkan file gambar nanti (misal: '/images/gkgs.png')
-    },
-    {
-      id: 'etle',
-      category: 'Computer Vision AI & Infrastructure',
-      title: 'ETLE Helmet Detection',
-      description:
-        'Benchmarking dan implementasi YOLOv8n untuk deteksi helm pengendara motor secara real-time pada sistem ETLE dengan pipeline terautomasi.',
-      tags: ['YOLOv8', 'PyTorch', 'OpenCV', 'Docker'],
-      theme: 'blue',
-      imageUrl: ''
-    },
-    {
-      id: 'fresh',
-      category: 'AI Classification & API',
-      title: 'FRESH AI Classifier',
-      description:
-        'Klasifikasi citra kualitas kesegaran bahan pangan secara otomatis dengan deployment REST API untuk meminimalisasi limbah makanan.',
-      tags: ['Python', 'CNN', 'FastAPI', 'Cloud'],
-      theme: 'orange',
-      imageUrl: ''
+      imageUrl: '/images/gkgs_app.png',
+      linkText: 'GitHub Repo',
+      linkUrl: 'https://github.com/JovanSiallagan/GKGS-APP'
     },
     {
       id: 'sinefolis',
@@ -322,7 +256,9 @@ export default function App() {
         'Platform katalog film modern yang berfokus pada prinsip User-Centered Design (UCD) dan performa interaktif berkecepatan tinggi.',
       tags: ['React', 'Tailwind', 'TypeScript', 'UI/UX'],
       theme: 'blue',
-      imageUrl: ''
+      imageUrl: '',
+      linkText: 'View Web',
+      linkUrl: 'https://github.com/JovanSiallagan'
     }
   ]
 
@@ -565,10 +501,15 @@ export default function App() {
                 key={tech.id}
                 className="flex items-center gap-3 p-3 rounded-lg bg-brand-card border border-brand-border hover:border-brand-orange/70 transition-all group cursor-default"
               >
-                <div className="p-1.5 rounded-md bg-neutral-900/90 border border-brand-border/60 group-hover:border-brand-orange/40 transition">
-                  <TechLogo type={tech.icon} />
+                <div className="w-8 h-8 rounded-md bg-neutral-900/90 border border-brand-border/60 group-hover:border-brand-orange/40 transition flex items-center justify-center p-1.5 flex-shrink-0">
+                  <img
+                    src={tech.logo}
+                    alt={tech.name}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
-                <div className="text-xs sm:text-sm font-semibold text-white group-hover:text-brand-orange transition">
+                <div className="text-xs sm:text-sm font-semibold text-white group-hover:text-brand-orange transition truncate">
                   {tech.name}
                 </div>
               </div>
@@ -625,9 +566,8 @@ export default function App() {
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-orange" />
                   </div>
 
-                  <h3 className="text-base font-semibold text-white transition flex items-center justify-between group-hover:text-brand-orange">
-                    <span>{proj.title}</span>
-                    <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <h3 className="text-base font-semibold text-white transition group-hover:text-brand-orange">
+                    {proj.title}
                   </h3>
 
                   <p className="text-xs text-neutral-400 leading-relaxed font-light">
@@ -635,15 +575,31 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 pt-3 border-t border-brand-border/60">
-                  {proj.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-900 text-neutral-400 border border-brand-border/30"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <div className="space-y-3 pt-3 border-t border-brand-border/60">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {proj.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-neutral-900 text-neutral-400 border border-brand-border/30"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {proj.linkUrl && (
+                    <div className="pt-1">
+                      <a
+                        href={proj.linkUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium bg-neutral-900 border border-brand-border hover:border-brand-orange hover:text-white text-neutral-300 transition group/btn"
+                      >
+                        <span>{proj.linkText || 'View Project'}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-brand-orange group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
