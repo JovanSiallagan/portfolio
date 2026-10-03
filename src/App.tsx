@@ -359,7 +359,7 @@ export default function App() {
               className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-neutral-200 transition shadow-lg shadow-white/10 flex items-center gap-2 group"
             >
               <FileText className="w-3.5 h-3.5 text-black group-hover:scale-110 transition" />
-              <span>Lihat CV</span>
+              <span>View Resume</span>
             </a>
 
             <a
