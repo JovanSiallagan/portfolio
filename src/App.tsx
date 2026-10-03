@@ -7,7 +7,8 @@ import {
   Terminal,
   CheckCircle2,
   Copy,
-  Image as ImageIcon
+  Image as ImageIcon,
+  FileText
 } from 'lucide-react'
 
 // Types
@@ -238,10 +239,10 @@ export default function App() {
     },
     {
       id: 'gkgs',
-      category: 'Full-Stack Ecosystem',
+      category: 'Mobile Application',
       title: 'GKGS APP',
       description:
-        'Prototype aplikasi mobile untuk mendukung digitalisasi layanan dan aktivitas gereja. Merancang dan mengembangkan sistem secara full-stack, mulai dari mobile application menggunakan Flutter, REST API dengan NestJS, hingga pengelolaan database PostgreSQL melalui Supabase. Fitur yang dikembangkan meliputi QR attendance, informasi gereja, doa & kesaksian, Alkitab digital, serta persembahan.',
+        'Prototype aplikasi mobile untuk mendukung digitalisasi layanan dan aktivitas gereja. Dikembangkan secara full-stack menggunakan Flutter, NestJS, dan PostgreSQL melalui Supabase, dengan fitur QR attendance, informasi gereja, doa & kesaksian, Alkitab digital, serta persembahan.',
       tags: ['Flutter', 'NestJS', 'PostgreSQL', 'Supabase'],
       theme: 'orange',
       imageUrl: '/images/gkgs_app.png',
@@ -264,7 +265,7 @@ export default function App() {
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault()
-    navigator.clipboard.writeText('jovan.siallagan@binus.ac.id')
+    navigator.clipboard.writeText('jovansiallagan@gmail.com')
     setCopiedEmail(true)
     setTimeout(() => setCopiedEmail(false), 2500)
   }
@@ -339,9 +340,9 @@ export default function App() {
             </h1>
 
             <h2 className="text-lg sm:text-2xl font-semibold tracking-tight">
-              <span className="text-white">Software Engineer</span>{' '}
+              <span className="text-brand-blue">Software Engineer</span>{' '}
               <span className="text-neutral-600 mx-1">·</span>{' '}
-              <span className="text-brand-blue">Digital Systems & Solutions</span>
+              <span className="text-white">Digital Systems & Solutions</span>
             </h2>
 
             <p className="max-w-xl mx-auto text-sm sm:text-base text-neutral-400 font-light leading-relaxed pt-1">
@@ -349,13 +350,16 @@ export default function App() {
             </p>
           </div>
 
-          {/* 2-Button Call to Action (View Projects & Contact Me) */}
+          {/* Call to Action Buttons (Preview CV & Contact Me) */}
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
             <a
-              href="#projects"
-              className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-neutral-200 transition shadow-lg shadow-white/10"
+              href="/CV%20Jovan%20Yehezkiel%20Farand%20Siallagan%20-%20WEB.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-neutral-200 transition shadow-lg shadow-white/10 flex items-center gap-2 group"
             >
-              View Projects
+              <FileText className="w-3.5 h-3.5 text-black group-hover:scale-110 transition" />
+              <span>Lihat CV</span>
             </a>
 
             <a
@@ -609,7 +613,7 @@ export default function App() {
         {/* CONTACT CTA BOX */}
         <section
           id="contact"
-          className="scroll-mt-24 p-8 rounded-2xl border border-brand-border bg-gradient-to-b from-brand-card to-[#090B0F] space-y-4 text-center relative overflow-hidden"
+          className="scroll-mt-24 p-8 rounded-2xl border border-brand-border hover:border-brand-orange/60 bg-gradient-to-b from-brand-card to-[#090B0F] space-y-4 text-center relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,106,0,0.15)]"
         >
           {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs">
             <Sparkles className="w-3.5 h-3.5" />
@@ -626,17 +630,27 @@ export default function App() {
 
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="mailto:jovan.siallagan@binus.ac.id"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold bg-brand-orange text-black hover:bg-orange-500 transition shadow-lg shadow-brand-orange/20"
+              href="mailto:jovansiallagan@gmail.com"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-neutral-200 transition shadow-lg shadow-white/10 group"
             >
-              <Mail className="w-3.5 h-3.5" />
+              <Mail className="w-3.5 h-3.5 text-black group-hover:scale-110 transition" />
               <span>Kirim Email</span>
+            </a>
+
+            <a
+              href="/CV%20Jovan%20Yehezkiel%20Farand%20Siallagan%20-%20WEB.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-medium bg-neutral-900 border border-brand-border hover:border-brand-orange text-neutral-200 hover:text-white transition group"
+            >
+              <FileText className="w-3.5 h-3.5 text-brand-orange group-hover:scale-110 transition" />
+              <span>Lihat CV</span>
             </a>
 
             <button
               type="button"
               onClick={handleCopyEmail}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium bg-neutral-900 border border-brand-border hover:border-neutral-500 text-neutral-300 hover:text-white transition"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium bg-neutral-900 border border-brand-border hover:border-brand-orange text-neutral-200 hover:text-white transition group"
             >
               {copiedEmail ? (
                 <>
@@ -645,7 +659,7 @@ export default function App() {
                 </>
               ) : (
                 <>
-                  <Copy className="w-3.5 h-3.5" />
+                  <Copy className="w-3.5 h-3.5 text-neutral-400 group-hover:text-brand-orange transition" />
                   <span>Salin Email</span>
                 </>
               )}
