@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 
 // Types
-interface ExperienceItem {
+export interface ExperienceItem {
   id: string
   role: string
   company: string
@@ -23,14 +23,14 @@ interface ExperienceItem {
   tags?: string[]
 }
 
-interface TechStackItem {
+export interface TechStackItem {
   id: string
   name: string
   // Tempat menaruh logo: file lokal di folder 'public/icons/' atau link URL gambar/SVG
   logo: string
 }
 
-interface ProjectItem {
+export interface ProjectItem {
   id: string
   category: string
   title: string
@@ -148,58 +148,300 @@ function CircuitBackground() {
 }
 
 export default function App() {
+  const [lang, setLang] = useState<'id' | 'en'>('id')
   const [experienceTab, setExperienceTab] = useState<'work' | 'creative'>('work')
   const [copiedEmail, setCopiedEmail] = useState(false)
 
-  const workExperiences: ExperienceItem[] = [
-    {
-      id: 'kamunesia',
-      role: 'Lead Software Engineer',
-      company: 'PT Kamunesia Media Arta',
-      employmentType: 'Full-time',
-      period: 'September 2025 — Sekarang',
-      description:
-        'Memimpin pengembangan dan arsitektur sistem full-stack (React, NestJS, PostgreSQL), serta mengelola infrastruktur server dan deployment (DevOps, CI/CD).',
-      badgeColor: 'orange',
-      tags: ['React', 'NestJS', 'PostgreSQL', 'System Architecture', 'DevOps', 'CI/CD']
+  const t = {
+    id: {
+      nav: {
+        about: 'About',
+        experience: 'Experience',
+        stack: 'Tech Stack',
+        projects: 'Projects',
+        contact: 'Contact'
+      },
+      hero: {
+        status: 'Open to Software Engineering Opportunities',
+        greeting: "Hi, I'm",
+        title: 'Software Engineer',
+        subtitle: 'Digital Systems & Solutions',
+        description:
+          'Merancang arsitektur dan membangun sistem, aplikasi, serta website yang scalable, dari development hingga deployment.',
+        viewResume: 'View Resume',
+        contactMe: 'Contact Me'
+      },
+      experience: {
+        sectionTitle: 'Experience',
+        workTab: 'Work',
+        creativeTab: 'Creative'
+      },
+      stack: {
+        sectionTitle: 'Current Technologies'
+      },
+      projectsMeta: {
+        sectionTitle: 'Selected Projects',
+        casesCount: '04 Cases',
+        previewImageText: 'Preview',
+        placeholderTip: '(Taruh file gambar di sini)'
+      },
+      contactBox: {
+        title: 'Terbuka untuk Peluang Baru',
+        description:
+          'Saya terbuka untuk peluang kerja, proyek, maupun kolaborasi di bidang software engineering, pengembangan sistem, dan teknologi.',
+        sendEmail: 'Kirim Email',
+        viewResume: 'Lihat CV',
+        copyEmail: 'Salin Email',
+        copiedEmail: 'Email Disalin!'
+      },
+      footer: {
+        location: 'Tangerang, Indonesia (WIB) · All rights reserved'
+      },
+      workExperiences: [
+        {
+          id: 'kamunesia',
+          role: 'Lead Software Engineer',
+          company: 'PT Kamunesia Media Arta',
+          employmentType: 'Full-time',
+          period: 'September 2025 — Sekarang',
+          description:
+            'Memimpin pengembangan dan arsitektur sistem full-stack (React, NestJS, PostgreSQL), serta mengelola infrastruktur server dan deployment (DevOps, CI/CD).',
+          badgeColor: 'orange' as const,
+          tags: ['React', 'NestJS', 'PostgreSQL', 'System Architecture', 'DevOps', 'CI/CD']
+        },
+        {
+          id: 'binus',
+          role: 'Computer Science Undergraduate Student',
+          company: 'BINUS University',
+          employmentType: 'Education',
+          period: '2024 — Sekarang',
+          description:
+            'Mempelajari dan menerapkan konsep ilmu komputer, algoritma, struktur data, basis data, serta pengembangan perangkat lunak melalui berbagai proyek akademik dan pengembangan aplikasi.',
+          badgeColor: 'blue' as const,
+          tags: ['Computer Science', 'Algorithm', 'Data Structure', 'Database', 'Software Engineering']
+        }
+      ],
+      creativeExperiences: [
+        {
+          id: 'btri',
+          role: 'Community & Media Administrator',
+          company: 'Komunitas Bocchi the Rock! Indonesia',
+          employmentType: 'Volunteer',
+          period: 'Mei 2026 — Sekarang',
+          description:
+            'Mengelola administrasi dan kegiatan komunitas, termasuk koordinasi acara, publikasi informasi, pengelolaan media sosial, serta dokumentasi dan komunikasi dengan anggota komunitas.',
+          badgeColor: 'blue' as const,
+          tags: ['Leadership', 'Community Management', 'Event Planning & Coordination', 'Social Media', 'Public Relations']
+        },
+        {
+          id: 'gkgs',
+          role: 'Youth Ministry & Music Volunteer',
+          company: 'Gereja Kristus Gading Serpong',
+          employmentType: 'Volunteer',
+          period: '2022 — Sekarang',
+          description:
+            'Terlibat dalam pelayanan remaja dan kegiatan youth, termasuk membantu koordinasi kegiatan, persiapan acara, serta mendukung pelayanan musik dalam ibadah.',
+          badgeColor: 'orange' as const,
+          tags: ['Youth Ministry', 'Music', 'Project Management', 'Faith-Based Leadership']
+        }
+      ],
+      projectsList: [
+        {
+          id: 'kamunesiaweb',
+          category: 'Web Application',
+          title: 'Kamunesia Media Arta Web',
+          description:
+            'Memimpin pengembangan web application PT Kamunesia Media Arta bersama tim, mulai dari merancang sistem dan arsitektur aplikasi, mengembangkan frontend dan backend secara full-stack, hingga deployment dan pengelolaan infrastruktur.',
+          tags: ['React', 'Node.js', 'REST API', 'PostgreSQL', 'DevOps'],
+          theme: 'orange' as const,
+          imageUrl: '/images/KMA_Web.png',
+          linkText: 'View Web',
+          linkUrl: 'https://kamunesia.com'
+        },
+        {
+          id: 'ojs',
+          category: 'Web Platform',
+          title: 'EduHuman Society Journal Web',
+          description:
+            'Website jurnal ilmiah EduHuman Society berbasis Open Journal Systems (OJS), yang dikembangkan dan dikonfigurasi untuk mendukung pengelolaan publikasi, artikel ilmiah, serta proses editorial dan penerbitan jurnal secara online.',
+          tags: ['PHP', 'Open Journal Systems', 'MySQL', 'Deployment'],
+          theme: 'blue' as const,
+          imageUrl: '/images/OJS_Web.png',
+          linkText: 'View Web',
+          linkUrl: 'https://journal.kamunesia.com'
+        },
+        {
+          id: 'gkgs',
+          category: 'Mobile Application',
+          title: 'GKGS APP',
+          description:
+            'Prototype aplikasi mobile untuk mendukung digitalisasi layanan dan aktivitas gereja. Dikembangkan secara full-stack menggunakan Flutter, NestJS, dan PostgreSQL melalui Supabase, dengan fitur QR attendance, informasi gereja, doa & kesaksian, Alkitab digital, serta persembahan.',
+          tags: ['Flutter', 'NestJS', 'PostgreSQL', 'Supabase'],
+          theme: 'orange' as const,
+          imageUrl: '/images/gkgs_app.png',
+          linkText: 'GitHub Repo',
+          linkUrl: 'https://github.com/JovanSiallagan/GKGS-APP'
+        },
+        {
+          id: 'bocchipoll',
+          category: 'Desktop Application',
+          title: 'Bocchi the Rock! Indonesia — Polling System',
+          description:
+            'Aplikasi desktop interaktif untuk melakukan polling karakter favorit dari Bocchi the Rock!. Dibangun menggunakan Java Swing dan SQLite, dengan fitur live voting, visualisasi hasil secara real-time, serta penyimpanan data secara lokal.',
+          tags: ['Java', 'Swing', 'SQLite'],
+          theme: 'blue' as const,
+          imageUrl: '/images/bocchi_poll.png',
+          linkText: 'GitHub Repo',
+          linkUrl: 'https://github.com/JovanSiallagan/BocchiPoll'
+        }
+      ]
     },
-    {
-      id: 'binus',
-      role: 'Computer Science Undergraduate Student',
-      company: 'BINUS University',
-      employmentType: 'Education',
-      period: '2024 — Sekarang',
-      description:
-        'Mempelajari dan menerapkan konsep ilmu komputer, algoritma, struktur data, basis data, serta pengembangan perangkat lunak melalui berbagai proyek akademik dan pengembangan aplikasi.',
-      badgeColor: 'blue',
-      tags: ['Computer Science', 'Algorithm', 'Data Structure', 'Database', 'Software Engineering']
+    en: {
+      nav: {
+        about: 'About',
+        experience: 'Experience',
+        stack: 'Tech Stack',
+        projects: 'Projects',
+        contact: 'Contact'
+      },
+      hero: {
+        status: 'Open to Software Engineering Opportunities',
+        greeting: "Hi, I'm",
+        title: 'Software Engineer',
+        subtitle: 'Digital Systems & Solutions',
+        description:
+          'Architecting and building scalable systems, applications, and web platforms across the development lifecycle.',
+        viewResume: 'View Resume',
+        contactMe: 'Contact Me'
+      },
+      experience: {
+        sectionTitle: 'Experience',
+        workTab: 'Work',
+        creativeTab: 'Creative'
+      },
+      stack: {
+        sectionTitle: 'Current Technologies'
+      },
+      projectsMeta: {
+        sectionTitle: 'Selected Projects',
+        casesCount: '04 Cases',
+        previewImageText: 'Preview',
+        placeholderTip: '(Place image file here)'
+      },
+      contactBox: {
+        title: 'Open for New Opportunities',
+        description:
+          'I am open to job opportunities, projects, and collaborations in software engineering, system development, and modern technologies.',
+        sendEmail: 'Send Email',
+        viewResume: 'View Resume',
+        copyEmail: 'Copy Email',
+        copiedEmail: 'Email Copied!'
+      },
+      footer: {
+        location: 'Tangerang, Indonesia (WIB) · All rights reserved'
+      },
+      workExperiences: [
+        {
+          id: 'kamunesia',
+          role: 'Lead Software Engineer',
+          company: 'PT Kamunesia Media Arta',
+          employmentType: 'Full-time',
+          period: 'September 2025 — Present',
+          description:
+            'Leading full-stack system development and architecture (React, NestJS, PostgreSQL), as well as managing server infrastructure and deployment pipelines (DevOps, CI/CD).',
+          badgeColor: 'orange' as const,
+          tags: ['React', 'NestJS', 'PostgreSQL', 'System Architecture', 'DevOps', 'CI/CD']
+        },
+        {
+          id: 'binus',
+          role: 'Computer Science Undergraduate Student',
+          company: 'BINUS University',
+          employmentType: 'Education',
+          period: '2024 — Present',
+          description:
+            'Studying and implementing computer science foundations, algorithms, data structures, databases, and software engineering through academic projects and application development.',
+          badgeColor: 'blue' as const,
+          tags: ['Computer Science', 'Algorithm', 'Data Structure', 'Database', 'Software Engineering']
+        }
+      ],
+      creativeExperiences: [
+        {
+          id: 'btri',
+          role: 'Community & Media Administrator',
+          company: 'Bocchi the Rock! Indonesia Community',
+          employmentType: 'Volunteer',
+          period: 'May 2026 — Present',
+          description:
+            'Managing community administration and operations, including event coordination, announcements, social media management, documentation, and member relations.',
+          badgeColor: 'blue' as const,
+          tags: ['Leadership', 'Community Management', 'Event Planning & Coordination', 'Social Media', 'Public Relations']
+        },
+        {
+          id: 'gkgs',
+          role: 'Youth Ministry & Music Volunteer',
+          company: 'Gereja Kristus Gading Serpong',
+          employmentType: 'Volunteer',
+          period: '2022 — Present',
+          description:
+            'Engaged in youth ministry, assisting with event coordination, service preparation, and supporting the music ministry during worship services.',
+          badgeColor: 'orange' as const,
+          tags: ['Youth Ministry', 'Music', 'Project Management', 'Faith-Based Leadership']
+        }
+      ],
+      projectsList: [
+        {
+          id: 'kamunesiaweb',
+          category: 'Web Application',
+          title: 'Kamunesia Media Arta Web',
+          description:
+            'Led the development of PT Kamunesia Media Arta web application with the team—from system architecture design and full-stack development (frontend & backend) to cloud deployment and infrastructure management.',
+          tags: ['React', 'Node.js', 'REST API', 'PostgreSQL', 'DevOps'],
+          theme: 'orange' as const,
+          imageUrl: '/images/KMA_Web.png',
+          linkText: 'View Web',
+          linkUrl: 'https://kamunesia.com'
+        },
+        {
+          id: 'ojs',
+          category: 'Web Platform',
+          title: 'EduHuman Society Journal Web',
+          description:
+            'Scientific journal website for EduHuman Society powered by Open Journal Systems (OJS), configured and customized to support publication management, research papers, and online editorial workflows.',
+          tags: ['PHP', 'Open Journal Systems', 'MySQL', 'Deployment'],
+          theme: 'blue' as const,
+          imageUrl: '/images/OJS_Web.png',
+          linkText: 'View Web',
+          linkUrl: 'https://journal.kamunesia.com'
+        },
+        {
+          id: 'gkgs',
+          category: 'Mobile Application',
+          title: 'GKGS APP',
+          description:
+            'A mobile application prototype supporting digital church services and operations. Built full-stack using Flutter, NestJS, and PostgreSQL via Supabase, featuring QR attendance, church bulletins, prayer requests, digital Bible, and tithes.',
+          tags: ['Flutter', 'NestJS', 'PostgreSQL', 'Supabase'],
+          theme: 'orange' as const,
+          imageUrl: '/images/gkgs_app.png',
+          linkText: 'GitHub Repo',
+          linkUrl: 'https://github.com/JovanSiallagan/GKGS-APP'
+        },
+        {
+          id: 'bocchipoll',
+          category: 'Desktop Application',
+          title: 'Bocchi the Rock! Indonesia — Polling System',
+          description:
+            'An interactive desktop application for voting favorite Bocchi the Rock! characters. Developed with Java Swing and SQLite, featuring live voting, real-time results visualization, and local data persistence.',
+          tags: ['Java', 'Swing', 'SQLite'],
+          theme: 'blue' as const,
+          imageUrl: '/images/bocchi_poll.png',
+          linkText: 'GitHub Repo',
+          linkUrl: 'https://github.com/JovanSiallagan/BocchiPoll'
+        }
+      ]
     }
-  ]
+  }
 
-  const creativeExperiences: ExperienceItem[] = [
-    {
-      id: 'btri',
-      role: 'Community & Media Administrator',
-      company: 'Komunitas Bocchi the Rock! Indonesia',
-      employmentType: 'Volunteer',
-      period: 'Mei 2026 — Sekarang',
-      description:
-        'Mengelola administrasi dan kegiatan komunitas, termasuk koordinasi acara, publikasi informasi, pengelolaan media sosial, serta dokumentasi dan komunikasi dengan anggota komunitas.',
-      badgeColor: 'blue',
-      tags: ['Leadership', 'Community Management', 'Event Planning & Coordination', 'Social Media', 'Public Relations']
-    },
-    {
-      id: 'gkgs',
-      role: 'Youth Ministry & Music Volunteer',
-      company: 'Gereja Kristus Gading Serpong',
-      employmentType: 'Volunteer',
-      period: '2022 — Sekarang',
-      description:
-        'Terlibat dalam pelayanan remaja dan kegiatan youth, termasuk membantu koordinasi kegiatan, persiapan acara, serta mendukung pelayanan musik dalam ibadah.',
-      badgeColor: 'orange',
-      tags: ['Youth Ministry', 'Music', 'Project Management', 'Faith-Based Leadership']
-    }
-  ]
+  const currentContent = t[lang]
 
   const techStacks: TechStackItem[] = [
     { id: 'typescript', name: 'TypeScript', logo: '/icons/typescript.svg' },
@@ -212,57 +454,6 @@ export default function App() {
     { id: 'deployment', name: 'Deployment', logo: '/icons/deployment.svg' }
   ]
 
-  const projects: ProjectItem[] = [
-    {
-      id: 'kamunesiaweb',
-      category: 'Web Application',
-      title: 'Kamunesia Media Arta Web',
-      description:
-        'Memimpin pengembangan web application PT Kamunesia Media Arta bersama tim, mulai dari merancang sistem dan arsitektur aplikasi, mengembangkan frontend dan backend secara full-stack, hingga deployment dan pengelolaan infrastruktur.',
-      tags: ['React', 'Node.js', 'REST API', 'PostgreSQL', 'DevOps'],
-      theme: 'orange',
-      imageUrl: '/images/KMA_Web.png',
-      linkText: 'View Web',
-      linkUrl: 'https://kamunesia.com'
-    },
-    {
-      id: 'ojs',
-      category: 'Web Platform',
-      title: 'EduHuman Society Journal Web',
-      description:
-        'Website jurnal ilmiah EduHuman Society berbasis Open Journal Systems (OJS), yang dikembangkan dan dikonfigurasi untuk mendukung pengelolaan publikasi, artikel ilmiah, serta proses editorial dan penerbitan jurnal secara online.',
-      tags: ['PHP', 'Open Journal Systems', 'MySQL', 'Deployment'],
-      theme: 'blue',
-      imageUrl: '/images/OJS_Web.png',
-      linkText: 'View Web',
-      linkUrl: 'https://journal.kamunesia.com'
-    },
-    {
-      id: 'gkgs',
-      category: 'Mobile Application',
-      title: 'GKGS APP',
-      description:
-        'Prototype aplikasi mobile untuk mendukung digitalisasi layanan dan aktivitas gereja. Dikembangkan secara full-stack menggunakan Flutter, NestJS, dan PostgreSQL melalui Supabase, dengan fitur QR attendance, informasi gereja, doa & kesaksian, Alkitab digital, serta persembahan.',
-      tags: ['Flutter', 'NestJS', 'PostgreSQL', 'Supabase'],
-      theme: 'orange',
-      imageUrl: '/images/gkgs_app.png',
-      linkText: 'GitHub Repo',
-      linkUrl: 'https://github.com/JovanSiallagan/GKGS-APP'
-    },
-    {
-      id: 'bocchipoll',
-      category: 'Desktop Application',
-      title: 'Bocchi the Rock! Indonesia — Polling System',
-      description:
-        'Aplikasi desktop interaktif untuk melakukan polling karakter favorit dari Bocchi the Rock!. Dibangun menggunakan Java Swing dan SQLite, dengan fitur live voting, visualisasi hasil secara real-time, serta penyimpanan data secara lokal.',
-      tags: ['Java', 'Swing', 'SQLite'],
-      theme: 'blue',
-      imageUrl: '/images/bocchi_poll.png',
-      linkText: 'GitHub Repo',
-      linkUrl: 'https://github.com/JovanSiallagan/BocchiPoll'
-    }
-  ]
-
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault()
     navigator.clipboard.writeText('jovansiallagan@gmail.com')
@@ -270,7 +461,8 @@ export default function App() {
     setTimeout(() => setCopiedEmail(false), 2500)
   }
 
-  const currentExperiences = experienceTab === 'work' ? workExperiences : creativeExperiences
+  const currentExperiences =
+    experienceTab === 'work' ? currentContent.workExperiences : currentContent.creativeExperiences
 
   return (
     <div className="relative min-h-screen bg-brand-dark text-slate-200 overflow-x-hidden selection:bg-brand-orange selection:text-black font-sans">
@@ -293,28 +485,48 @@ export default function App() {
             Jovan Siallagan<span className="text-brand-orange text-base leading-none font-bold">.</span>
           </a>
 
+          {/* Centered Navigation Links (including Contact) */}
           <nav className="hidden sm:flex items-center gap-6 text-xs tracking-wide text-neutral-400">
             <a href="#about" className="hover:text-brand-orange transition">
-              About
+              {currentContent.nav.about}
             </a>
             <a href="#experience" className="hover:text-brand-orange transition">
-              Experience
+              {currentContent.nav.experience}
             </a>
             <a href="#stack" className="hover:text-brand-orange transition">
-              Tech Stack
+              {currentContent.nav.stack}
             </a>
             <a href="#projects" className="hover:text-brand-orange transition">
-              Projects
+              {currentContent.nav.projects}
+            </a>
+            <a href="#contact" className="hover:text-brand-orange transition">
+              {currentContent.nav.contact}
             </a>
           </nav>
 
-          <a
-            href="#contact"
-            className="text-xs font-medium px-3.5 py-1.5 rounded-full border border-brand-border bg-neutral-900/60 hover:border-brand-orange hover:text-brand-orange transition flex items-center gap-2"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
-            Contact
-          </a>
+          {/* Language Switcher (ID / EN Toggle) */}
+          <div className="flex items-center p-0.5 rounded-full bg-neutral-900 border border-brand-border text-xs">
+            <button
+              type="button"
+              onClick={() => setLang('id')}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-mono transition-all ${lang === 'id'
+                  ? 'bg-brand-orange text-black font-bold shadow-sm'
+                  : 'text-neutral-400 hover:text-white'
+                }`}
+            >
+              ID
+            </button>
+            <button
+              type="button"
+              onClick={() => setLang('en')}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-mono transition-all ${lang === 'en'
+                  ? 'bg-brand-orange text-black font-bold shadow-sm'
+                  : 'text-neutral-400 hover:text-white'
+                }`}
+            >
+              EN
+            </button>
+          </div>
         </div>
       </header>
 
@@ -328,7 +540,7 @@ export default function App() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
             </span>
-            <span className="font-medium">Open to Software Engineering Opportunities</span>
+            <span className="font-medium">{currentContent.hero.status}</span>
             <span className="text-neutral-600">·</span>
             <span className="text-neutral-400 font-mono text-[11px]">Tangerang, ID</span>
           </div>
@@ -336,21 +548,21 @@ export default function App() {
           {/* Main Name Greeting Headline */}
           <div className="space-y-4 max-w-2xl mx-auto">
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Hi, I'm <span className="text-brand-orange">Jovan Siallagan</span>
+              {currentContent.hero.greeting} <span className="text-brand-orange">Jovan Siallagan</span>
             </h1>
 
             <h2 className="text-lg sm:text-2xl font-semibold tracking-tight">
-              <span className="text-brand-blue">Software Engineer</span>{' '}
+              <span className="text-brand-blue">{currentContent.hero.title}</span>{' '}
               <span className="text-neutral-600 mx-1">·</span>{' '}
-              <span className="text-white">Digital Systems & Solutions</span>
+              <span className="text-white">{currentContent.hero.subtitle}</span>
             </h2>
 
             <p className="max-w-xl mx-auto text-sm sm:text-base text-neutral-400 font-light leading-relaxed pt-1">
-              Merancang arsitektur dan membangun sistem, aplikasi, serta website yang scalable, dari development hingga deployment.
+              {currentContent.hero.description}
             </p>
           </div>
 
-          {/* Call to Action Buttons (Preview CV & Contact Me) */}
+          {/* Call to Action Buttons (View Resume & Contact Me) */}
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
             <a
               href="/CV%20Jovan%20Yehezkiel%20Farand%20Siallagan%20-%20WEB.pdf"
@@ -359,7 +571,7 @@ export default function App() {
               className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-neutral-200 transition shadow-lg shadow-white/10 flex items-center gap-2 group"
             >
               <FileText className="w-3.5 h-3.5 text-black group-hover:scale-110 transition" />
-              <span>View Resume</span>
+              <span>{currentContent.hero.viewResume}</span>
             </a>
 
             <a
@@ -367,7 +579,7 @@ export default function App() {
               className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-medium bg-neutral-900 border border-brand-border hover:border-brand-orange text-neutral-200 hover:text-white transition flex items-center gap-2"
             >
               <Mail className="w-3.5 h-3.5 text-brand-orange" />
-              <span>Contact Me</span>
+              <span>{currentContent.hero.contactMe}</span>
             </a>
 
             {/* Social Icons */}
@@ -404,7 +616,7 @@ export default function App() {
             <div className="flex items-center gap-2">
               <Layers className="w-4 h-4 text-brand-orange" />
               <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-400 font-mono">
-                Experience
+                {currentContent.experience.sectionTitle}
               </h2>
             </div>
 
@@ -414,21 +626,21 @@ export default function App() {
                 type="button"
                 onClick={() => setExperienceTab('work')}
                 className={`px-3.5 py-1 rounded-md transition font-medium ${experienceTab === 'work'
-                  ? 'bg-[#1A1E29] text-brand-orange shadow-sm'
-                  : 'text-neutral-400 hover:text-white'
+                    ? 'bg-[#1A1E29] text-brand-orange shadow-sm'
+                    : 'text-neutral-400 hover:text-white'
                   }`}
               >
-                Work
+                {currentContent.experience.workTab}
               </button>
               <button
                 type="button"
                 onClick={() => setExperienceTab('creative')}
                 className={`px-3.5 py-1 rounded-md transition font-medium ${experienceTab === 'creative'
-                  ? 'bg-[#1A1E29] text-brand-orange shadow-sm'
-                  : 'text-neutral-400 hover:text-white'
+                    ? 'bg-[#1A1E29] text-brand-orange shadow-sm'
+                    : 'text-neutral-400 hover:text-white'
                   }`}
               >
-                Creative
+                {currentContent.experience.creativeTab}
               </button>
             </div>
           </div>
@@ -495,7 +707,7 @@ export default function App() {
           <div className="flex items-center gap-2">
             <Terminal className="w-4 h-4 text-brand-orange" />
             <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-400 font-mono">
-              Current Technologies
+              {currentContent.stack.sectionTitle}
             </h2>
           </div>
 
@@ -527,14 +739,14 @@ export default function App() {
             <div className="flex items-center gap-2">
               <Code2 className="w-4 h-4 text-brand-orange" />
               <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-400 font-mono">
-                Selected Projects
+                {currentContent.projectsMeta.sectionTitle}
               </h2>
             </div>
-            <span className="text-xs text-brand-orange font-mono">04 Cases</span>
+            <span className="text-xs text-brand-orange font-mono">{currentContent.projectsMeta.casesCount}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {projects.map((proj) => (
+            {currentContent.projectsList.map((proj) => (
               <div
                 key={proj.id}
                 className="rounded-xl border border-brand-border bg-brand-card p-5 space-y-4 transition-all duration-200 group flex flex-col justify-between hover:border-brand-orange/70"
@@ -554,10 +766,10 @@ export default function App() {
                           <ImageIcon className="w-5 h-5" />
                         </div>
                         <span className="text-[11px] font-mono tracking-tight text-neutral-400">
-                          {proj.title} Preview
+                          {proj.title} {currentContent.projectsMeta.previewImageText}
                         </span>
                         <span className="text-[9px] font-mono text-neutral-600">
-                          (Taruh file gambar di sini)
+                          {currentContent.projectsMeta.placeholderTip}
                         </span>
                       </div>
                     )}
@@ -615,17 +827,12 @@ export default function App() {
           id="contact"
           className="scroll-mt-24 p-8 rounded-2xl border border-brand-border hover:border-brand-orange/60 bg-gradient-to-b from-brand-card to-[#090B0F] space-y-4 text-center relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,106,0,0.15)]"
         >
-          {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Open for Collaboration & Projects</span>
-          </div> */}
-
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white max-w-md mx-auto">
-            Terbuka untuk Peluang Baru
+            {currentContent.contactBox.title}
           </h2>
 
           <p className="text-xs sm:text-sm text-neutral-400 max-w-md mx-auto font-light leading-relaxed">
-            Saya terbuka untuk peluang kerja, proyek, maupun kolaborasi di bidang software engineering, pengembangan sistem, dan teknologi.
+            {currentContent.contactBox.description}
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
@@ -634,7 +841,7 @@ export default function App() {
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white text-black hover:bg-neutral-200 transition shadow-lg shadow-white/10 group"
             >
               <Mail className="w-3.5 h-3.5 text-black group-hover:scale-110 transition" />
-              <span>Kirim Email</span>
+              <span>{currentContent.contactBox.sendEmail}</span>
             </a>
 
             <a
@@ -644,7 +851,7 @@ export default function App() {
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-medium bg-neutral-900 border border-brand-border hover:border-brand-orange text-neutral-200 hover:text-white transition group"
             >
               <FileText className="w-3.5 h-3.5 text-brand-orange group-hover:scale-110 transition" />
-              <span>Lihat CV</span>
+              <span>{currentContent.contactBox.viewResume}</span>
             </a>
 
             <button
@@ -655,12 +862,12 @@ export default function App() {
               {copiedEmail ? (
                 <>
                   <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
-                  <span className="text-green-400">Email Disalin!</span>
+                  <span className="text-green-400">{currentContent.contactBox.copiedEmail}</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-3.5 h-3.5 text-neutral-400 group-hover:text-brand-orange transition" />
-                  <span>Salin Email</span>
+                  <span>{currentContent.contactBox.copyEmail}</span>
                 </>
               )}
             </button>
@@ -673,7 +880,7 @@ export default function App() {
         <div className="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>© {new Date().getFullYear()} Jovan Siallagan</div>
           <div className="text-[11px] text-neutral-500">
-            Tangerang, Indonesia (WIB) · All rights reserved
+            {currentContent.footer.location}
           </div>
         </div>
       </footer>
