@@ -1,32 +1,24 @@
-# React + TypeScript + Vite
+# Jovan Siallagan — Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A personal portfolio website showcasing professional experience, tech stack, and selected projects. Designed with a focus on modern aesthetics, responsiveness, and high performance.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Bilingual Support**: Dual language toggle for Indonesian and English (ID/EN switch).
+- **Experience Timeline**: Interactive tabs for professional (*Work*) and community (*Creative/Volunteer*) experiences.
+- **Projects Showcase**: Curated gallery of projects complete with technology tags and direct links.
+- **Tech Stack Overview**: Overview of technologies and tools used.
+- **Modern Dark Aesthetic**: Minimalist design featuring circuit-inspired accents and ambient glows.
+- **Production-Ready Server**: Includes a lightweight Node.js static server (`server.js`) for seamless deployment.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vite.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Server**: Node.js HTTP Server (`server.js`)
+- **Linter**: [Oxlint](https://oxc.rs/)
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+© 2026 Jovan Siallagan. All rights reserved.
