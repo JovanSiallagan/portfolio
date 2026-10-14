@@ -535,7 +535,7 @@ export default function App() {
         {/* HERO SECTION (Personal Brand Centric) */}
         <section id="about" className="scroll-mt-24 text-center pt-8 space-y-6">
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#11141B] border border-brand-border text-xs text-neutral-300 shadow-sm">
+          {/* <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#11141B] border border-brand-border text-xs text-neutral-300 shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
@@ -543,7 +543,7 @@ export default function App() {
             <span className="font-medium">{currentContent.hero.status}</span>
             <span className="text-neutral-600">·</span>
             <span className="text-neutral-400 font-mono text-[11px]">Tangerang, ID</span>
-          </div>
+          </div> */}
 
           {/* Main Name Greeting Headline */}
           <div className="space-y-4 max-w-2xl mx-auto">
