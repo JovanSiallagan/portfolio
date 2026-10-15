@@ -565,7 +565,7 @@ export default function App() {
           {/* Call to Action Buttons (View Resume & Contact Me) */}
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
             <a
-              href="/CV%20Jovan%20Yehezkiel%20Farand%20Siallagan%20-%20WEB.pdf"
+              href="/CV%20Jovan%20Yehezkiel%20Farand%20Siallagan%20WEB.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-black hover:bg-neutral-200 transition shadow-lg shadow-white/10 flex items-center gap-2 group"
@@ -845,7 +845,7 @@ export default function App() {
             </a>
 
             <a
-              href="/CV%20Jovan%20Yehezkiel%20Farand%20Siallagan%20-%20WEB.pdf"
+              href="/CV%20Jovan%20Yehezkiel%20Farand%20Siallagan%20WEB.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-medium bg-neutral-900 border border-brand-border hover:border-brand-orange text-neutral-200 hover:text-white transition group"
