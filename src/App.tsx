@@ -482,7 +482,7 @@ export default function App() {
             href="#"
             className="text-sm sm:text-base font-bold tracking-tight text-white hover:text-brand-orange transition flex items-center gap-0.5"
           >
-            Jovan Siallagan<span className="text-brand-orange text-base leading-none font-bold">.</span>
+            <span className="text-brand-orange text-base leading-none font-bold">Jovan Siallagan</span>
           </a>
 
           {/* Centered Navigation Links (including Contact) */}
