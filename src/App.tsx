@@ -200,7 +200,7 @@ export default function App() {
       workExperiences: [
         {
           id: 'kamunesia',
-          role: 'Lead Software Engineer',
+          role: 'Software Engineer',
           company: 'PT Kamunesia Media Arta',
           employmentType: 'Full-time',
           period: 'September 2025 — Sekarang',
@@ -343,7 +343,7 @@ export default function App() {
       workExperiences: [
         {
           id: 'kamunesia',
-          role: 'Lead Software Engineer',
+          role: 'Software Engineer',
           company: 'PT Kamunesia Media Arta',
           employmentType: 'Full-time',
           period: 'September 2025 — Present',
