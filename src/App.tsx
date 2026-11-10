@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Mail,
   ArrowUpRight,
@@ -464,6 +464,20 @@ export default function App() {
   const currentExperiences =
     experienceTab === 'work' ? currentContent.workExperiences : currentContent.creativeExperiences
 
+  useEffect(() => {
+    const elements = document.querySelectorAll('.reveal-on-scroll')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle('is-visible', entry.isIntersecting)
+        })
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+    )
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [lang])
+
   return (
     <div className="relative min-h-screen bg-brand-dark text-slate-200 overflow-x-hidden selection:bg-brand-orange selection:text-black font-sans">
       {/* Ambient Light Orbs */}
@@ -533,7 +547,7 @@ export default function App() {
       {/* Main Content Container */}
       <main className="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24 space-y-24">
         {/* HERO SECTION (Personal Brand Centric) */}
-        <section id="about" className="scroll-mt-24 text-center pt-8 space-y-6">
+        <section id="about" className="scroll-mt-24 text-center pt-8 space-y-6 reveal-on-scroll">
           {/* Status Badge */}
           {/* <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#11141B] border border-brand-border text-xs text-neutral-300 shadow-sm">
             <span className="relative flex h-2 w-2">
@@ -612,7 +626,7 @@ export default function App() {
 
         {/* EXPERIENCE SECTION (Interactive Tab, No Border Hover) */}
         <section id="experience" className="scroll-mt-24 space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between reveal-on-scroll">
             <div className="flex items-center gap-2">
               <Layers className="w-4 h-4 text-brand-orange" />
               <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-400 font-mono">
@@ -645,7 +659,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-brand-border bg-brand-card/60 backdrop-blur-sm p-6 space-y-6">
+          <div className="rounded-xl border border-brand-border bg-brand-card/60 backdrop-blur-sm p-6 space-y-6 reveal-on-scroll">
             {currentExperiences.map((item, index) => {
               const isLast = index === currentExperiences.length - 1
               const ringClass =
@@ -656,7 +670,11 @@ export default function App() {
                     : 'bg-neutral-600'
 
               return (
-                <div key={item.id} className="flex gap-4 group">
+                <div
+                  key={`${experienceTab}-${item.id}`}
+                  style={{ animationDelay: `${index * 80}ms` }}
+                  className="flex gap-4 group opacity-0 animate-fade-up"
+                >
                   <div className="mt-1 flex flex-col items-center">
                     <div className={`w-3 h-3 rounded-full ${ringClass}`} />
                     {!isLast && <div className="w-0.5 h-full bg-brand-border mt-2" />}
@@ -704,7 +722,7 @@ export default function App() {
 
         {/* TECH STACK SECTION (Hoverable Card) */}
         <section id="stack" className="scroll-mt-24 space-y-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 reveal-on-scroll">
             <Terminal className="w-4 h-4 text-brand-orange" />
             <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-400 font-mono">
               {currentContent.stack.sectionTitle}
@@ -712,10 +730,11 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {techStacks.map((tech) => (
+            {techStacks.map((tech, index) => (
               <div
                 key={tech.id}
-                className="flex items-center gap-3 p-3 rounded-lg bg-brand-card border border-brand-border hover:border-brand-orange/70 transition-all group cursor-default"
+                style={{ transitionDelay: `${index * 60}ms` }}
+                className="flex items-center gap-3 p-3 rounded-lg bg-brand-card border border-brand-border hover:border-brand-orange/70 transition-all group cursor-default reveal-on-scroll"
               >
                 <div className="w-8 h-8 rounded-md bg-neutral-900/90 border border-brand-border/60 group-hover:border-brand-orange/40 transition flex items-center justify-center p-1.5 flex-shrink-0">
                   <img
@@ -735,7 +754,7 @@ export default function App() {
 
         {/* PROJECTS SECTION (Hoverable Card with Image Container) */}
         <section id="projects" className="scroll-mt-24 space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between reveal-on-scroll">
             <div className="flex items-center gap-2">
               <Code2 className="w-4 h-4 text-brand-orange" />
               <h2 className="text-sm font-semibold tracking-wider uppercase text-neutral-400 font-mono">
@@ -746,10 +765,11 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {currentContent.projectsList.map((proj) => (
+            {currentContent.projectsList.map((proj, index) => (
               <div
                 key={proj.id}
-                className="rounded-xl border border-brand-border bg-brand-card p-5 space-y-4 transition-all duration-200 group flex flex-col justify-between hover:border-brand-orange/70"
+                style={{ transitionDelay: `${index * 100}ms` }}
+                className="rounded-xl border border-brand-border bg-brand-card p-5 space-y-4 transition-all duration-200 group flex flex-col justify-between hover:border-brand-orange/70 reveal-on-scroll"
               >
                 <div className="space-y-3">
                   {/* Image/Photo Container Placeholder */}
@@ -825,7 +845,7 @@ export default function App() {
         {/* CONTACT CTA BOX */}
         <section
           id="contact"
-          className="scroll-mt-24 p-8 rounded-2xl border border-brand-border hover:border-brand-orange/60 bg-gradient-to-b from-brand-card to-[#090B0F] space-y-4 text-center relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,106,0,0.15)]"
+          className="scroll-mt-24 p-8 rounded-2xl border border-brand-border hover:border-brand-orange/60 bg-gradient-to-b from-brand-card to-[#090B0F] space-y-4 text-center relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(255,106,0,0.15)] reveal-on-scroll"
         >
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white max-w-md mx-auto">
             {currentContent.contactBox.title}

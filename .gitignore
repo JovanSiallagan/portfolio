@@ -30,6 +30,7 @@ lerna-debug.log*
 
 # Vite cache & Testing
 .vite/
+.vercel/
 coverage/
 *.lcov
 
