@@ -30,6 +30,32 @@ html {
   animation: fadeUpIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(36px) scale(0.95);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease,
+    box-shadow 0.3s ease;
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll,
+  .animate-fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+}
+
 /* Ambient Glow Effect */
 .glow-orange {
   position: absolute;
